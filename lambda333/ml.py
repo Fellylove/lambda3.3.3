@@ -1,5 +1,5 @@
 from sklearn.linear_model import LogisticRegression
-from .data_model import User
+from lambda333.data_model import User
 import numpy as np
 import spacy
 import pandas as pd
