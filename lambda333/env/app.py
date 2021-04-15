@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request
 import json
-from data_model import DB, User, Tweet
-from twitter import upsert_user
+from .data_model import DB, User, Tweet
+from .twitter import upsert_user
 from os import path
-from ml import predict_most_likely_author
+from .ml import predict_most_likely_author
 
 
 def create_app():
@@ -20,7 +20,7 @@ def create_app():
             #DB.create_all()
             #DB.session.commit()
             pass
-        with open('templates/landing.json') as f:
+        with open('lambda333/landing.json') as f:
             args = json.load(f)
         return render_template('base.html', **args)
 
@@ -34,10 +34,19 @@ def create_app():
     @app.route('/predict_author', methods=['GET'])
     def predict_author():
         tweet_to_classify = request.args['tweet_to_classify']
-        return predict_most_likely_author(tweet_to_classify, ['cher', 'elonmusk', 'barackobama'])
+        return predict_most_likely_author(tweet_to_classify, ['cher', 'barackobama'])
+
+    @app.route('/reset')
+    def reset():
+        DB.drop_all()
+        DB.create_all()
+        return 'database refreshed'
 
     return app
 
 
-if __name__ == "__main__":
-    create_app().run(host='127.0.0.1', port=5000)
+#if __name__ == "__main__":
+    #create_app().run(host='127.0.0.1', port=5000)
+
+#predict_author?tweet_to_classify=immigrants%20are%20important
+#add_user?twitter_handle=barackobama

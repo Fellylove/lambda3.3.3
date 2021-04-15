@@ -2,7 +2,7 @@
 $('#author_text_input').innerText = "Please enter a twitter user's handle";
 $('#author_submit').click(function () {
     $.ajax({
-        url: '/add_user?twitter_handle=' + $('#author_text_input').val(),
+        url: '/add_user?twitter_handle=' + $('#author_name_input').val(),
         type: 'GET',
     });
 });

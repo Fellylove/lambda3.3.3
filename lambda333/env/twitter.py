@@ -1,6 +1,6 @@
 import tweepy
 import os
-from data_model import DB, User, Tweet
+from .data_model import DB, User, Tweet
 
 twitter_api_key = os.environ['TWITTER_API_KEY']
 twitter_api_secret = os.environ['TWITTER_API_KEY_SECRET']
